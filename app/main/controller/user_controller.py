@@ -36,7 +36,7 @@ class UserPublicId(Resource):
         """Get a user by public_id"""
         user = get_a_user_by_public_id(public_id)
         if not user:
-            api.abort(404)
+            api.abort(404, status='fail', message='User not found')
         else:
             return user
 
@@ -51,9 +51,9 @@ class UserEmail(Resource):
         """Get a user by email"""
         user = get_a_user_by_email(email)
         if not user:
-            api.abort(404)
+            api.abort(404, status='fail', message='User not found')
         else:
-            return
+            return user
 
 
 @api.route('/username/<username>')
@@ -66,6 +66,6 @@ class UserUsername(Resource):
         """Get a user by username"""
         user = get_a_user_by_username(username)
         if not user:
-            api.abort(404)
+            api.abort(404, status='fail', message='User not found')
         else:
             return user
