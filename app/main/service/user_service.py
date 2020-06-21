@@ -5,7 +5,7 @@ from app.main import db
 from app.main.model.user import User
 
 def save_new_user(data):
-    user = get_a_user_by_email(data['email'])
+    user = get_a_user_by_email(data['email'].lower())
     if not user:
         new_user = User(
             public_id = str(uuid.uuid4()),
@@ -27,7 +27,10 @@ def save_new_user(data):
 
 
 def get_all_users():
-    return User.query.all()
+    users = User.query.all()
+    for user in users:
+        print(user.email)
+    return users
 
 
 def get_a_user_by_public_id(public_id):
