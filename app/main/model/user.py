@@ -31,12 +31,12 @@ class User(db.Model):
     def check_password(self, password):
         return flask_bcrypt.check_password_hash(self.password_hash, password)
 
-    def encode_auth_token(self, user_id):
+    def encode_auth_token(self):
         try:
             payload = {
                 'exp': datetime.utcnow() + timedelta(days=1, seconds=5),
                 'iat': datetime.utcnow(),
-                'sub': user_id
+                'sub': self.id
             }
             return jwt.encode(
                 payload,

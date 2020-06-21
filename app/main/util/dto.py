@@ -10,3 +10,11 @@ class UserDto:
         'public_id': fields.String(description='user Identifier'),
         'registered_on': fields.DateTime(description='When user was registered')
     })
+
+
+class AuthDto:
+    api = Namespace('auth', description='authentication related operations')
+    user_auth = api.model('auth_details', {
+        'email': fields.String(required=True, description='User email address'),
+        'password': fields.String(required=True, description='User password')
+    })
